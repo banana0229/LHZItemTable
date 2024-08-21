@@ -1,774 +1,869 @@
 <!DOCTYPE html>
-<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="zh">
 
-<title>LHTRPG 道具查詢</title>
-<style>
-body {
-  font-family:'Lucida Grande','Lucida Sans Unicode', 'Lucida Sans Regular', Tahoma, Verdana, sans-serif;
-  font-size:0.7em;
-  line-height:1.5em;
-  color:#222;
-}
-a:link, a:visited, a:link, a:visited {
-    color:#333;
-	text-decoration:underline;
-}
-a:hover, a:active, a:hover, a:active {
-    color:#999;
-	text-decoration:underline;
-}
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-p {
-  margin:0;padding:0;
-}
+	<title>LHTRPG 道具查詢</title>
+	<style>
+		body {
+			font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans Regular', Tahoma, Verdana, sans-serif;
+			font-size: 0.7em;
+			line-height: 1.5em;
+			color: #222;
+		}
 
-input ,select{
-vertical-align:middle;
-}
+		a:link,
+		a:visited,
+		a:link,
+		a:visited {
+			color: #333;
+			text-decoration: underline;
+		}
 
-.left {
-  text-align:left;
-}
+		a:hover,
+		a:active,
+		a:hover,
+		a:active {
+			color: #999;
+			text-decoration: underline;
+		}
 
-.center {
-  text-align:center;
-}
+		p {
+			margin: 0;
+			padding: 0;
+		}
 
-.right {
-  text-align:center;
-}
+		input,
+		select {
+			vertical-align: middle;
+		}
 
-table {
-  width:900px;
-  border-collapse: collapse;
-  margin-top:10px;
-}
+		.left {
+			text-align: left;
+		}
 
-table tr.odd {
-  background-color:#eee;
-}
+		.center {
+			text-align: center;
+		}
 
-table tr.odd_b {
-  background-color:#a88;
-}
+		.right {
+			text-align: center;
+		}
 
-table tr.eve_b {
-  background-color:#caa;
-}
-table th {
-  border:solid 1px #ccc;
-  font-weight:normal;
-  color:#fff;
-  padding:2px;
-  background-color:#666;
-}
-table td {
-  border:solid 1px #ccc;
-  text-align:center;
-}
-</style>
+		table {
+			width: 900px;
+			border-collapse: collapse;
+			margin-top: 10px;
+		}
+
+		table tr.odd {
+			background-color: #eee;
+		}
+
+		table tr.odd_b {
+			background-color: #a88;
+		}
+
+		table tr.eve_b {
+			background-color: #caa;
+		}
+
+		table th {
+			border: solid 1px #ccc;
+			font-weight: normal;
+			color: #fff;
+			padding: 2px;
+			background-color: #666;
+		}
+
+		table td {
+			border: solid 1px #ccc;
+			text-align: center;
+		}
+
+		.multiLine {
+			white-space: pre-line;
+		}
+	</style>
 </head>
+
 <body>
-<h3>LHTRPG 道具查詢</h3>
-該工具為以<a href="https://unonek.sakura.ne.jp/lh/item.html">[LHTRPG アイテム検索]</a>為基礎，進行修改的中文版本。<br/>
-目前還在開發中，翻譯資料在遙遠的未來將會補上。<br/>
+	<h3>LHTRPG 道具查詢</h3>
+	該工具為以<a href="https://unonek.sakura.ne.jp/lh/item.html">[LHTRPG アイテム検索]</a>為基礎，進行修改的中文版本。<br />
+	目前還在開發中，翻譯資料在遙遠的未來將會補上。<br />
 
-<table>
-<tbody><tr><th>查詢條件</th></tr>
-<tr><td class="left">
-<label>&nbsp;Rank:<select name="CR" id="CR" onchange="reloadData();">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-  <option value="6">6</option>
-  <option value="7">7</option>
-  <option value="8">8</option>
-  <option value="9">9</option>
-  <option value="10">10</option>
-  <option value="11">11</option>
-  <option value="12">12</option>
-  <option value="13">13</option>
-  <option value="14">14</option>
-  <option value="15">15</option>
-  <option value="16">16</option>
-  <option value="17">17</option>
-  <option value="18">18</option>
-  <option value="19">19</option>
-  <option value="20">20</option>
-  <option value="21">21</option>
-  <option value="22">22</option>
-  <option value="23">23</option>
-  <option value="24">24</option>
-  <option value="25">25</option>
-  <option value="26">26</option>
-  <option value="27">27</option>
-  <option value="28">28</option>
-  <option value="29">29</option>
-  <option value="30" selected="">30</option>
-</select></label>&nbsp;
-<label>&nbsp;最低Rank:<select name="r_CR" id="r_CR" onchange="reloadData();">
-  <option value="1" selected="">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-  <option value="6">6</option>
-  <option value="7">7</option>
-  <option value="8">8</option>
-  <option value="9">9</option>
-  <option value="10">10</option>
-  <option value="11">11</option>
-  <option value="12">12</option>
-  <option value="13">13</option>
-  <option value="14">14</option>
-  <option value="15">15</option>
-  <option value="16">16</option>
-  <option value="17">17</option>
-  <option value="18">18</option>
-  <option value="19">19</option>
-  <option value="20">20</option>
-  <option value="21">21</option>
-  <option value="22">22</option>
-  <option value="23">23</option>
-  <option value="24">24</option>
-  <option value="25">25</option>
-  <option value="26">26</option>
-  <option value="27">27</option>
-  <option value="28">28</option>
-  <option value="29">29</option>
-  <option value="30">30</option>
-</select></label>&nbsp;
-<label>&nbsp;主職業:<select name="cls" id="cls" onchange="reloadData();">
-  <option selected="">　</option>
-  <option>守護戦士</option>
-  <option>武士</option>
-  <option>武闘家</option>
-  <option>施療神官</option>
-  <option>森呪遣い</option>
-  <option>神祇官</option>
-  <option>暗殺者</option>
-  <option>盗剣士</option>
-  <option>吟遊詩人</option>
-  <option>妖術師</option>
-  <option>召喚術師</option>
-  <option>付与術師</option>
-</select></label>&nbsp;
-<label>&nbsp;特技增幅：<select name="skl" id="skl" onchange="reloadData();">
-  <option selected="">なし</option>
-  <option>カスタムウェポン</option>
-  <option>エルヴンアカンプリスメント</option>
-  <option>ドワーヴンアーマメンツ</option>
-  <option>プログレッシブレリック</option>
-  <option>スタイリッシュテイル</option>
-  <option>ハンティングアタイア</option>
-  <option>狐の偽装虎衣</option>
-  <option>タリスモンガー</option>
-</select></label>&nbsp;
-<label><input id="pms" type="checkbox" onchange="reloadData();"> ポイズンマスタリー</label>&nbsp;
-<label><input id="cms" type="checkbox" onchange="reloadData();"> カードマスタリー(SL3)</label>&nbsp;<br>
-<label><input name="type" id="wep" type="radio" checked="" onchange="reloadData();"> 武器</label>&nbsp;
-<label><input name="type" id="arm" type="radio" onchange="reloadData();"> 防具</label>&nbsp;
-<label><input name="type" id="she" type="radio" onchange="reloadData();"> 盾</label>&nbsp;
-<label><input name="type" id="sup" type="radio" onchange="reloadData();"> 補助</label>&nbsp;
-<label><input name="type" id="bag" type="radio" onchange="reloadData();"> 収納</label>&nbsp;
-<label><input name="type" id="fod" type="radio" onchange="reloadData();"> 食物</label>&nbsp;
-<label><input name="type" id="pot" type="radio" onchange="reloadData();"> 藥水</label>&nbsp;
-<label><input name="type" id="piz" type="radio" onchange="reloadData();"> 咒藥</label>&nbsp;
-<label><input name="type" id="crd" type="radio" onchange="reloadData();"> 靈符</label>&nbsp;
-<label><input name="type" id="scr" type="radio" onchange="reloadData();"> 卷軸</label>&nbsp;
-<label><input name="type" id="jem" type="radio" onchange="reloadData();"> 寶珠</label>&nbsp;
-<label><input name="type" id="mus" type="radio" onchange="reloadData();"> 楽器</label>&nbsp;
-<label><input name="type" id="smn" type="radio" onchange="reloadData();"> 召喚笛</label>&nbsp;
-<label><input name="type" id="dep" type="radio" onchange="reloadData();"> 魔具</label>&nbsp;
-<label><input name="type" id="oth" type="radio" onchange="reloadData();"> その他</label>&nbsp;
-<br>
-<label><input name="type" id="tgc" type="radio" onchange="reloadData();"> タグ</label>&nbsp;
-<label><span id="tag_list"><select id="etc" name="etc" size="1" tabindex="0" onchange="tg_ck();reloadData();"><option value="0"></option><option value="1">両手</option><option value="2">片手</option><option value="3">刀</option><option value="4">剣</option><option value="5">弓</option><option value="6">投擲</option><option value="7">格闘</option><option value="8">槌斧</option><option value="9">杖</option><option value="10">槍</option><option value="11">鞭</option><option value="12">軽量</option><option value="13">楽器</option><option value="14">重鎧</option><option value="15">中鎧</option><option value="16">軽鎧</option><option value="17">盾</option><option value="18">補助装備</option><option value="19">頭部</option><option value="20">腕部</option><option value="21">脚部</option><option value="22">外套</option><option value="23">鞄</option><option value="24">魔石</option><option value="25">消耗品</option><option value="26">食物</option><option value="27">宝珠</option><option value="28">巻物</option><option value="29">水薬</option><option value="30">呪薬</option><option value="31">霊符</option><option value="32">召喚笛</option><option value="33">魔具</option><option value="34">光輝</option><option value="35">邪毒</option><option value="36">火炎</option><option value="37">冷気</option><option value="38">電撃</option><option value="39">精神</option><option value="40">偵察</option><option value="41">準備</option><option value="42">召喚</option><option value="43">刺繍</option><option value="44">非売品</option><option value="45">M2</option><option value="46">M4</option><option value="47">M5</option><option value="48">M6</option><option value="49">取引不可</option></select></span><input id="tag" type="checkbox" onchange="reloadData();">/</label>
-<label><input name="type" id="rec" type="radio" onchange="reloadData();"> レシピ</label>&nbsp;
-<label><input id="item_name" type="text" size="20" onfocus="rcp_ck();tm_start();" onblur="tm_Off();"><input id="rcp_s" type="checkbox" onchange="reloadData();">/</label>&nbsp;
-<label><input name="type" id="efe" type="radio" onchange="reloadData();"> 効果文</label>&nbsp;
-<label><input id="efec_txt" type="text" size="20" onfocus="efc_ck();tm_start();" onblur="tm_Off();"><input id="efc_s" type="checkbox" onchange="reloadData();"></label>&nbsp;<br>
-<label><input id="fct" type="checkbox" onchange="reloadData();"> 効果・解説を表示</label>&nbsp;
-<label><input id="rcp" type="checkbox" onchange="reloadData();"> レシピを表示</label>&nbsp;
-</td></tr>
-</tbody></table>
-<input type="button" name="r_all" value="検索条件初期化" onmouseup="reset_all()">&nbsp;<br>
-<table>
-<thead id="tablehead"><tr><th>名稱</th><th>IR</th><th>標籤</th><th>攻擊力</th><th>魔力</th><th>命中</th><th>行動</th><th>射程</th><th>價格</th></tr></thead>
-<tbody id="tablebody"></tbody>
-</table>
-
-
-<script type="text/javascript">
-
-var items;
-var tagl = [""];
-var timer1;
-
-var tag_l = ["", "雙手", "單手", "刀", "劍", "弓", "投擲", "格闘", "槌斧", "杖", "槍", "鞭", "輕量", "楽器", "重鎧", "中鎧", "軽鎧", "盾", "輔助裝備", "頭部", "腕部", "腳部", "外套", "背包", "魔石", "消耗品", "食物", "寶珠", "卷軸", "藥水", "咒藥", "靈符", "召喚笛", "魔具", "光輝", "邪毒", "火炎", "冷気", "電撃", "精神", "偵察", "準備", "召喚", "刺繍", "非賣品", "M2", "M4", "M5", "M6", "不可交易"];
-
-function tm_start() {
-  timer1 = setInterval("reloadData()",1000);
-}
-
-function tm_Off() {
-    clearInterval(timer1);
-    reloadData();
-}
-
-function tg_ck() {
-  if(!document.getElementById('tag').checked){
-    document.getElementById('tgc').checked = true;
-  }
-  document.getElementById('tag').checked = true;
-}
-
-function rcp_ck() {
-  if(!document.getElementById('rcp_s').checked) {
-    document.getElementById('rec').checked = true;
-  }
-  document.getElementById('rcp_s').checked = true;
-}
-
-function efc_ck() {
-  if(!document.getElementById('efc_s').checked) {
-    document.getElementById('efe').checked = true;
-  }
-  document.getElementById('efc_s').checked = true;
-}
-
-function reloadData() {
-  var cr = 30;
-  var wep = document.getElementById('wep');
-  var arm = document.getElementById('arm');
-  var she = document.getElementById('she');
-  var sup = document.getElementById('sup');
-  var bag = document.getElementById('bag');
-  var fod = document.getElementById('fod');
-  var pot = document.getElementById('pot');
-  var piz = document.getElementById('piz');
-  var crd = document.getElementById('crd');
-  var scr = document.getElementById('scr');
-  var jem = document.getElementById('jem');
-  var mus = document.getElementById('mus');
-  var smn = document.getElementById('smn');
-  var dep = document.getElementById('dep');
-  var oth = document.getElementById('oth');
-  var pms = document.getElementById('pms');
-  var cms = document.getElementById('cms');
-  var tgc = document.getElementById('tgc');
-  var rec = document.getElementById('rec');
-  var efe = document.getElementById('efe');
-  cr = document.getElementById('CR').selectedIndex + 1;
-  r_cr = document.getElementById('r_CR').selectedIndex + 1;
-  var tag_c = document.getElementById('tag');
-  var rcp_c = document.getElementById('rcp_s');
-  var item_name = document.getElementById('item_name').value;
-  var efc_c= document.getElementById('efc_s');
-  var efec_txt = document.getElementById('efec_txt').value;
-
-  var fct = document.getElementById('fct');
-  var rcp = document.getElementById('rcp');
-
-  var cls_eq = [
-  [],
-  ["劍", "槍", "槌斧", "弓", "盾", "重鎧", "中鎧", "軽鎧"],
-  ["刀", "槍", "槌斧", "弓", "重鎧", "中鎧", "軽鎧"],
-  ["格闘", "投擲", "軽鎧"],
-  ["劍", "槌斧", "盾", "重鎧", "中鎧", "軽鎧"],
-  ["槍", "槌斧", "鞭", "中鎧", "軽鎧"],
-  ["刀", "弓", "軽鎧"],
-  ["劍", "刀","鞭", "弓", "中鎧", "軽鎧"],
-  ["劍", "槌斧", "鞭", "投擲", "盾", "中鎧", "軽鎧"],
-  ["劍", "槍", "槌斧", "鞭", "弓", "楽器", "中鎧", "軽鎧"],
-  ["杖", "輕量", "軽鎧"],
-  ["杖", "鞭", "輕量", "軽鎧"],
-  ["杖", "輕量", "軽鎧"]
-  ];
-    var cls = document.getElementById("cls").selectedIndex;
+	<table>
+		<tbody>
+			<tr>
+				<th>查詢條件</th>
+			</tr>
+			<tr>
+				<td class="left">
+					<label>&nbsp;Rank:<select name="CR" id="CR" onchange="reloadData();">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30" selected="">30</option>
+						</select></label>&nbsp;
+					<label>&nbsp;最低Rank:<select name="r_CR" id="r_CR" onchange="reloadData();">
+							<option value="1" selected="">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+						</select></label>&nbsp;
+					<label>&nbsp;主職業:<select name="cls" id="cls" onchange="reloadData();">
+							<option selected="">　</option>
+							<option>守護戦士</option>
+							<option>武士</option>
+							<option>武闘家</option>
+							<option>施療神官</option>
+							<option>森呪遣い</option>
+							<option>神祇官</option>
+							<option>暗殺者</option>
+							<option>盗剣士</option>
+							<option>吟遊詩人</option>
+							<option>妖術師</option>
+							<option>召喚術師</option>
+							<option>付与術師</option>
+						</select></label>&nbsp;
+					<label>&nbsp;特技增幅：<select name="skl" id="skl" onchange="reloadData();">
+							<option selected="">なし</option>
+							<option>カスタムウェポン</option>
+							<option>エルヴンアカンプリスメント</option>
+							<option>ドワーヴンアーマメンツ</option>
+							<option>プログレッシブレリック</option>
+							<option>スタイリッシュテイル</option>
+							<option>ハンティングアタイア</option>
+							<option>狐の偽装虎衣</option>
+							<option>タリスモンガー</option>
+						</select></label>&nbsp;
+					<label><input id="pms" type="checkbox" onchange="reloadData();"> ポイズンマスタリー</label>&nbsp;
+					<label><input id="cms" type="checkbox" onchange="reloadData();"> カードマスタリー(SL3)</label>&nbsp;<br>
+					<label><input name="type" id="wep" type="radio" checked="" onchange="reloadData();">
+						武器</label>&nbsp;
+					<label><input name="type" id="arm" type="radio" onchange="reloadData();"> 防具</label>&nbsp;
+					<label><input name="type" id="she" type="radio" onchange="reloadData();"> 盾</label>&nbsp;
+					<label><input name="type" id="sup" type="radio" onchange="reloadData();"> 補助</label>&nbsp;
+					<label><input name="type" id="bag" type="radio" onchange="reloadData();"> 収納</label>&nbsp;
+					<label><input name="type" id="fod" type="radio" onchange="reloadData();"> 食物</label>&nbsp;
+					<label><input name="type" id="pot" type="radio" onchange="reloadData();"> 藥水</label>&nbsp;
+					<label><input name="type" id="piz" type="radio" onchange="reloadData();"> 咒藥</label>&nbsp;
+					<label><input name="type" id="crd" type="radio" onchange="reloadData();"> 靈符</label>&nbsp;
+					<label><input name="type" id="scr" type="radio" onchange="reloadData();"> 卷軸</label>&nbsp;
+					<label><input name="type" id="jem" type="radio" onchange="reloadData();"> 寶珠</label>&nbsp;
+					<label><input name="type" id="mus" type="radio" onchange="reloadData();"> 楽器</label>&nbsp;
+					<label><input name="type" id="smn" type="radio" onchange="reloadData();"> 召喚笛</label>&nbsp;
+					<label><input name="type" id="dep" type="radio" onchange="reloadData();"> 魔具</label>&nbsp;
+					<label><input name="type" id="oth" type="radio" onchange="reloadData();"> その他</label>&nbsp;
+					<br>
+					<label><input name="type" id="tgc" type="radio" onchange="reloadData();"> タグ</label>&nbsp;
+					<label><span id="tag_list"><select id="etc" name="etc" size="1" tabindex="0"
+								onchange="tg_ck();reloadData();">
+								<option value="0"></option>
+								<option value="1">両手</option>
+								<option value="2">片手</option>
+								<option value="3">刀</option>
+								<option value="4">剣</option>
+								<option value="5">弓</option>
+								<option value="6">投擲</option>
+								<option value="7">格闘</option>
+								<option value="8">槌斧</option>
+								<option value="9">杖</option>
+								<option value="10">槍</option>
+								<option value="11">鞭</option>
+								<option value="12">軽量</option>
+								<option value="13">楽器</option>
+								<option value="14">重鎧</option>
+								<option value="15">中鎧</option>
+								<option value="16">軽鎧</option>
+								<option value="17">盾</option>
+								<option value="18">補助装備</option>
+								<option value="19">頭部</option>
+								<option value="20">腕部</option>
+								<option value="21">脚部</option>
+								<option value="22">外套</option>
+								<option value="23">鞄</option>
+								<option value="24">魔石</option>
+								<option value="25">消耗品</option>
+								<option value="26">食物</option>
+								<option value="27">宝珠</option>
+								<option value="28">巻物</option>
+								<option value="29">水薬</option>
+								<option value="30">呪薬</option>
+								<option value="31">霊符</option>
+								<option value="32">召喚笛</option>
+								<option value="33">魔具</option>
+								<option value="34">光輝</option>
+								<option value="35">邪毒</option>
+								<option value="36">火炎</option>
+								<option value="37">冷気</option>
+								<option value="38">電撃</option>
+								<option value="39">精神</option>
+								<option value="40">偵察</option>
+								<option value="41">準備</option>
+								<option value="42">召喚</option>
+								<option value="43">刺繍</option>
+								<option value="44">非売品</option>
+								<option value="45">M2</option>
+								<option value="46">M4</option>
+								<option value="47">M5</option>
+								<option value="48">M6</option>
+								<option value="49">取引不可</option>
+							</select></span><input id="tag" type="checkbox" onchange="reloadData();">/</label>
+					<label><input name="type" id="rec" type="radio" onchange="reloadData();"> レシピ</label>&nbsp;
+					<label><input id="item_name" type="text" size="20" onfocus="rcp_ck();tm_start();"
+							onblur="tm_Off();"><input id="rcp_s" type="checkbox"
+							onchange="reloadData();">/</label>&nbsp;
+					<label><input name="type" id="efe" type="radio" onchange="reloadData();"> 効果文</label>&nbsp;
+					<label><input id="efec_txt" type="text" size="20" onfocus="efc_ck();tm_start();"
+							onblur="tm_Off();"><input id="efc_s" type="checkbox"
+							onchange="reloadData();"></label>&nbsp;<br>
+					<label><input id="fct" type="checkbox" onchange="reloadData();"> 効果・解説を表示</label>&nbsp;
+					<label><input id="rcp" type="checkbox" onchange="reloadData();"> レシピを表示</label>&nbsp;
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<input type="button" name="r_all" value="検索条件初期化" onmouseup="reset_all()">&nbsp;<br>
+	<table>
+		<thead id="tablehead">
+			<tr>
+				<th>名稱</th>
+				<th>IR</th>
+				<th>標籤</th>
+				<th>攻擊力</th>
+				<th>魔力</th>
+				<th>命中</th>
+				<th>行動</th>
+				<th>射程</th>
+				<th>價格</th>
+			</tr>
+		</thead>
+		<tbody id="tablebody"></tbody>
+	</table>
 
 
-  var skl_b = [
-  [],
-  ["劍", "刀", "槍", "槌斧", "鞭", "格闘","弓", "投擲", "楽器", "輕量"],
-  ["片手", "中鎧"],
-  ["重鎧", "中鎧", "盾"],
-  ["咒藥", "靈符", "卷軸", "寶珠"],
-  ["外套", "腕部", "腳部"],
-  ["両手", "頭部", "腕部"],
-  ["軽鎧", "外套", "腳部"],
-  ["杖", "魔石", "頭部", "背包"]
-  ];
-  var skl = document.getElementById("skl").selectedIndex;
-  //ポイマスは呪薬
-  //カドマスは霊符
+	<script type="text/javascript">
+
+		var items;
+		var tagl = [""];
+		var timer1;
+
+		var tag_l = ["", "雙手", "單手", "刀", "劍", "弓", "投擲", "格闘", "槌斧", "杖", "槍", "鞭", "輕量", "楽器", "重鎧", "中鎧", "軽鎧", "盾", "輔助裝備", "頭部", "腕部", "腳部", "外套", "背包", "魔石", "消耗品", "食物", "寶珠", "卷軸", "藥水", "咒藥", "靈符", "召喚笛", "魔具", "光輝", "邪毒", "火炎", "冷気", "電撃", "精神", "偵察", "準備", "召喚", "刺繍", "非賣品", "M2", "M4", "M5", "M6", "不可交易"];
+
+		function tm_start() {
+			timer1 = setInterval("reloadData()", 1000);
+		}
+
+		function tm_Off() {
+			clearInterval(timer1);
+			reloadData();
+		}
+
+		function tg_ck() {
+			if (!document.getElementById('tag').checked) {
+				document.getElementById('tgc').checked = true;
+			}
+			document.getElementById('tag').checked = true;
+		}
+
+		function rcp_ck() {
+			if (!document.getElementById('rcp_s').checked) {
+				document.getElementById('rec').checked = true;
+			}
+			document.getElementById('rcp_s').checked = true;
+		}
+
+		function efc_ck() {
+			if (!document.getElementById('efc_s').checked) {
+				document.getElementById('efe').checked = true;
+			}
+			document.getElementById('efc_s').checked = true;
+		}
+
+		function reloadData() {
+			var cr = 30;
+			var wep = document.getElementById('wep');
+			var arm = document.getElementById('arm');
+			var she = document.getElementById('she');
+			var sup = document.getElementById('sup');
+			var bag = document.getElementById('bag');
+			var fod = document.getElementById('fod');
+			var pot = document.getElementById('pot');
+			var piz = document.getElementById('piz');
+			var crd = document.getElementById('crd');
+			var scr = document.getElementById('scr');
+			var jem = document.getElementById('jem');
+			var mus = document.getElementById('mus');
+			var smn = document.getElementById('smn');
+			var dep = document.getElementById('dep');
+			var oth = document.getElementById('oth');
+			var pms = document.getElementById('pms');
+			var cms = document.getElementById('cms');
+			var tgc = document.getElementById('tgc');
+			var rec = document.getElementById('rec');
+			var efe = document.getElementById('efe');
+			cr = document.getElementById('CR').selectedIndex + 1;
+			r_cr = document.getElementById('r_CR').selectedIndex + 1;
+			var tag_c = document.getElementById('tag');
+			var rcp_c = document.getElementById('rcp_s');
+			var item_name = document.getElementById('item_name').value;
+			var efc_c = document.getElementById('efc_s');
+			var efec_txt = document.getElementById('efec_txt').value;
+
+			var fct = document.getElementById('fct');
+			var rcp = document.getElementById('rcp');
+
+			var cls_eq = [
+				[],
+				["劍", "槍", "槌斧", "弓", "盾", "重鎧", "中鎧", "軽鎧"],
+				["刀", "槍", "槌斧", "弓", "重鎧", "中鎧", "軽鎧"],
+				["格闘", "投擲", "軽鎧"],
+				["劍", "槌斧", "盾", "重鎧", "中鎧", "軽鎧"],
+				["槍", "槌斧", "鞭", "中鎧", "軽鎧"],
+				["刀", "弓", "軽鎧"],
+				["劍", "刀", "鞭", "弓", "中鎧", "軽鎧"],
+				["劍", "槌斧", "鞭", "投擲", "盾", "中鎧", "軽鎧"],
+				["劍", "槍", "槌斧", "鞭", "弓", "楽器", "中鎧", "軽鎧"],
+				["杖", "輕量", "軽鎧"],
+				["杖", "鞭", "輕量", "軽鎧"],
+				["杖", "輕量", "軽鎧"]
+			];
+			var cls = document.getElementById("cls").selectedIndex;
 
 
-  var tag_i = document.getElementById("etc").selectedIndex;
-
-  var thead = document.getElementById("tablehead");
-  thead.innerHTML = "";
-
-  var tbody = document.getElementById("tablebody");
-  tbody.innerHTML = "";
-
-
-  var headRow = document.createElement('tr');
-
-  headRow.appendChild(createHead("名稱"));
-  headRow.appendChild(createHead("IR"));
-  headRow.appendChild(createHead("標籤"));
-
-  var colCount = 4;
-  if(wep.checked) {
-    headRow.appendChild(createHead("攻撃力"));
-    headRow.appendChild(createHead("魔力"));
-    headRow.appendChild(createHead("命中"));
-    headRow.appendChild(createHead("行動"));
-    headRow.appendChild(createHead("射程"));
-    colCount = 9;
-  }
-  if(arm.checked || she.checked) {
-    headRow.appendChild(createHead("物理防御力"));
-    headRow.appendChild(createHead("魔法防御力"));
-    headRow.appendChild(createHead("行動"));
-    colCount = 7;
-  }
-  if(sup.checked) {
-    headRow.appendChild(createHead("魔力"));
-    headRow.appendChild(createHead("物理防御力"));
-    headRow.appendChild(createHead("魔法防御力"));
-    headRow.appendChild(createHead("行動"));
-    colCount = 8;
-  }
-  //if(bag.checked) {
-  //  headRow.appendChild(createHead("スロット数"));
-  //  headRow.appendChild(createHead("収納制限"));
-  //  colCount = 6;
-  //}
-  if(fod.checked || pot.checked || piz.checked || crd.checked || scr.checked || jem.checked || oth.checked) {
-    headRow.appendChild(createHead("時機"));
-    headRow.appendChild(createHead("對象"));
-    headRow.appendChild(createHead("射程"));
-    headRow.appendChild(createHead("判定"));
-    colCount = 8;
-  }
-
-  headRow.appendChild(createHead("價格"));
-  thead.appendChild(headRow);
-
-  var dispCount = 0;
-  for(var i=0; i < items.length; i++) {
-    var f1 = 0;
-    var tag = items[i].tags;
-    var tag_s = "";
-    for(var j=0; j < tag.length; j++) {
-      tag_s += tag[j];
-    }
-    if(efc_c.checked == true) {
-      var str = escape(efec_txt)
-      //if (efec_txt == "") {
-        //continue;
-      //}
-      var re = new RegExp(str, "i");
-      if (items[i].function == null) {
-        continue;
-      }
-      if (!items[i].function.match(re)) {
-        continue;
-      }
-    }
-    if(rcp_c.checked == true) {
-      var str = escape(item_name)
-      var re = new RegExp(str, "i");
-      if (items[i].recipe == null) {
-        continue;
-      }
-      var i_recipe = items[i].recipe
-      if (!i_recipe.match(re)) {
-        continue;
-      }
-    }
-    if(tag_c.checked == true) {
-      if(tag_i == 0) {
-        if(tag.length != 0) {
-          continue;
-        }
-      }else{
-        var re = new RegExp(tag_l[tag_i], "i");
-        if(!tag_s.match(re)){
-          continue;
-        }
-      }
-    }
-      var ir = items[i].item_rank;
-      for(var j=0; j < skl_b[skl].length; j++) {
-        var re = new RegExp(skl_b[skl][j], "i");
-        if (tag_s.match(re)) {
-          ir -= 2;
-          break;
-        }
-      }
-      var re = new RegExp("咒藥", "i");
-      if(pms.checked == true && tag_s.match(re) && skl != 4) {
-        ir -= 2;
-      }
-      re = new RegExp("靈符", "i");
-      if(cms.checked == true && tag_s.match(re) && skl != 4) {
-        ir -= 3;
-      }
-      if(cms.checked == true && tag_s.match(re) && skl == 4) {
-        ir -= 1;
-      }
-      if(ir <= 0) {
-        ir = 1;
-      }
-      if(r_cr > ir){
-        continue;
-      }else if(ir > cr) {
-        continue;
-      }
-      //ラジオボタン関係の検索
-      var type = items[i].type;
-      if(tgc.checked == true) {
-        if(tag_i == 0) {
-          if(tag.length != 0) {
-            continue;
-          }
-        }else{
-          var re = new RegExp(tag_l[tag_i], "i");
-          if(!tag_s.match(re)){
-            continue;
-          }
-        }
-      }else if(rec.checked == true) {
-        var str = escape(item_name)
-        var re = new RegExp(str, "i");
-        if (items[i].recipe == null) {
-          continue;
-        }
-        var i_recipe = items[i].recipe
-        if (!i_recipe.match(re)) {
-          continue;
-        }
-      }else if(efe.checked == true) {
-        var str = escape(efec_txt)
-        var re = new RegExp(str, "i");
-        if (items[i].function == null) {
-          continue;
-        }
-        if (!items[i].function.match(re)) {
-          continue;
-        }
-      }else{
-        if(type == "武器" && !wep.checked) {
-          continue;
-        }
-        if(type == "防具" && !arm.checked) {
-          continue;
-        }
-        if(type == "盾" && !she.checked) {
-          continue;
-        }
-        if(type == "補助" && !sup.checked) {
-          continue;
-        }
-        if(type == "収納" && !bag.checked) {
-          continue;
-        }
-        if(type == "食物" && !fod.checked) {
-          continue;
-        }
-        if(type == "藥水" && !pot.checked) {
-          continue;
-        }
-        if(type == "咒藥" && !piz.checked) {
-          continue;
-        }
-        if(type == "靈符" && !crd.checked) {
-          continue;
-        }
-        if(type == "卷軸" && !scr.checked) {
-          continue;
-        }
-        if(type == "寶珠" && !jem.checked) {
-          continue;
-        }
-        if(type == "楽器" && !mus.checked) {
-          continue;
-        }
-        if(type == "召喚笛" && !smn.checked) {
-          continue;
-        }
-        if(type == "魔具" && !dep.checked) {
-          continue;
-        }
-        if(type == "その他" && !oth.checked) {
-          continue;
-        }
-      }
-      //例外処理
-      //クラス制限
-      if(type != "補助"){
-        if(cls_eq[cls].length != 0) {
-          for(var j=0; j < cls_eq[cls].length; j++) {
-            var re = new RegExp(cls_eq[cls][j], "i");
-            if (tag_s.match(re)) {
-              f1 = 1;
-            }
-          }
-        }else{
-          f1 = 1;
-        }
-      }else{
-        f1 = 1;
-      }
-      //特殊アイテム　守護1:武士2:武闘3:施療4:森5:神祇6:暗殺7:刀剣8:吟遊9:妖術10:召喚11:付与12
-      if(type == "武器") {
-        if(items[i].name == "火蜥蜴の牙剣" && cls == 11) {
-          f1 = 1;
-        }
-        if(items[i].name == "蒼き大渦の斧" && cls != 1 && cls != 0) {
-          continue;
-        }
-        if(items[i].name == "強弓・ビートルクロウ" && cls != 2 && cls != 0) {
-          continue;
-        }
-        if(items[i].name == "黒霞の小太刀" && cls != 7 && cls != 0) {
-          continue;
-        }
-        if(items[i].name == "忘れえぬ炎" && cls < 10 && cls != 0) {
-          continue;
-        }
-        if(items[i].name == "魔槍アンバーハート" && cls != 5 && cls != 0) {
-          continue;
-        }
-      }else if(type == "防具") {
-        if(items[i].name == "隠者のローブ" && cls < 10 && cls != 0) {
-          continue;
-        }
-        if(items[i].name == "式神繰りの羽織" && cls != 6 && cls != 0) {
-          continue;
-        }
-        if(items[i].name == "霧かすみの打掛" && cls != 6 && cls != 0) {
-          continue;
-        }
-      }else if(type == "盾") {
-        if(items[i].name == "リーフシールド" && cls == 5) {
-          f1 = 1;
-        }
-      }else if(type == "補助") {
-        if(items[i].name == "アイアンヘルム" && cls != 0 && cls != 1 && cls !=2){
-          continue;
-        }
-        if(items[i].name == "鉢がね" && cls != 0 && cls != 2 && cls !=3){
-          continue;
-        }
-        if(items[i].name == "バシネット" && cls != 0 && cls != 1 && cls !=3){
-          continue;
-        }
-        if(items[i].name == "業師の手甲" && cls != 0 && cls != 7 && cls !=8 && cls !=9){
-          continue;
-        }
-        if(items[i].name == "大海獣のヒレ兜" && cls > 3){
-          continue;
-        }
-        if(items[i].name == "黒カブト" && cls != 0 && cls != 1 && cls !=2){
-          continue;
-        }
-        if(items[i].name == "守護の鉢巻き" && cls != 0 && cls != 2 && cls !=3){
-          continue;
-        }
-        if(items[i].name == "ソリッドクラウン" && cls != 0 && cls != 1 && cls !=3){
-          continue;
-        }
-        if(items[i].name == "グレイトヘルム" && cls != 0 && cls != 1 && cls !=2){
-          continue;
-        }
-        if(items[i].name == "ダ・スクゥインの指輪" && cls != 0 && cls != 11){
-          continue;
-        }
-        if(items[i].name == "鬼首兜" && cls != 0 && cls != 2 && cls !=3){
-          continue;
-        }
-      }
-      if(f1 == 0) {
-        continue;
-      }
+			var skl_b = [
+				[],
+				["劍", "刀", "槍", "槌斧", "鞭", "格闘", "弓", "投擲", "楽器", "輕量"],
+				["片手", "中鎧"],
+				["重鎧", "中鎧", "盾"],
+				["咒藥", "靈符", "卷軸", "寶珠"],
+				["外套", "腕部", "腳部"],
+				["両手", "頭部", "腕部"],
+				["軽鎧", "外套", "腳部"],
+				["杖", "魔石", "頭部", "背包"]
+			];
+			var skl = document.getElementById("skl").selectedIndex;
+			//ポイマスは呪薬
+			//カドマスは霊符
 
 
-    var n_ir = items[i].item_rank;
-    var row = document.createElement('tr');
-    if(dispCount%2==0) {
-      if(n_ir <= cr) {
-        row.setAttribute("class","odd");
-      }else{
-        row.setAttribute("class","odd_b");
-      }
-    }else if(n_ir > cr) {
-      row.setAttribute("class","eve_b");
-    }
-    var nameCol = createCol(innerHTML=items[i].name);
-    nameCol.setAttribute("class","left");
-    row.appendChild(nameCol);
-    row.appendChild(createCol(innerHTML=items[i].item_rank));
-    var tagCol = createCol(innerHTML=items[i].tags);
-    tagCol.setAttribute("class","left");
-    row.appendChild(tagCol);
+			var tag_i = document.getElementById("etc").selectedIndex;
 
-    if(wep.checked) {
-      row.appendChild(createCol(innerHTML=items[i].physical_attack));
-      row.appendChild(createCol(innerHTML=items[i].magic_attack));
-      row.appendChild(createCol(innerHTML=items[i].hit));
-      row.appendChild(createCol(innerHTML=items[i].action));
-      row.appendChild(createCol(innerHTML=items[i].range));
-    }
-    if(arm.checked || she.checked) {
-      row.appendChild(createCol(innerHTML=items[i].physical_defense));
-      row.appendChild(createCol(innerHTML=items[i].magic_defense));
-      row.appendChild(createCol(innerHTML=items[i].action));
-    }
-    if(sup.checked) {
-      row.appendChild(createCol(innerHTML=items[i].magic_attack));
-      row.appendChild(createCol(innerHTML=items[i].physical_defense));
-      row.appendChild(createCol(innerHTML=items[i].magic_defense));
-      row.appendChild(createCol(innerHTML=items[i].action));
-    }
-    //if(bag.checked) {
-    //  row.appendChild(createCol("no data"));
-    //  row.appendChild(createCol("no data"));
-    //}
-    if(fod.checked || pot.checked || piz.checked || crd.checked || scr.checked || jem.checked || oth.checked) {
-      row.appendChild(createCol(innerHTML=items[i].timing));
-      row.appendChild(createCol(innerHTML=items[i].target));
-      row.appendChild(createCol(innerHTML=items[i].range));
-      row.appendChild(createCol(innerHTML=items[i].roll));
-    }
-    row.appendChild(createCol(innerHTML=items[i].price));
-    tbody.appendChild(row);
+			var thead = document.getElementById("tablehead");
+			thead.innerHTML = "";
 
-    if(fct.checked || (rcp.checked && items[i].recipe != null)) {
-      var row2 = document.createElement('tr');
-      if(dispCount%2==0) {
-        if(n_ir <= cr) {
-          row2.setAttribute("class","odd");
-        }else{
-          row2.setAttribute("class","odd_b");
-        }
-      }else if(n_ir > cr) {
-        row2.setAttribute("class","eve_b");
-      }
-      var functionCol = document.createElement('td');
-      functionCol.setAttribute("colspan",colCount);
-      functionCol.setAttribute("class","left");
-      var funtionText = "";
-      var recipeText = "";
-      if(fct.checked) {
-        funtionText = "<p>効果・解説：" + items[i].function + "</p>";
-      }
-      if(rcp.checked && items[i].recipe != null) {
-        recipeText = "<p>レシピ：" + items[i].recipe + "</p>";
-      }
-      functionCol.innerHTML = funtionText + recipeText;
-      row2.appendChild(functionCol);
-      tbody.appendChild(row2);
-    }
+			var tbody = document.getElementById("tablebody");
+			tbody.innerHTML = "";
 
-    dispCount++;
-  }
-}
 
-function createHead(contents) {
-  var col = document.createElement('th');
-  col.innerHTML=contents;
-  return col;
-}
+			var headRow = document.createElement('tr');
 
-function createCol(contents) {
-  var col = document.createElement('td');
-  col.innerHTML=contents;
-  return col;
-}
+			headRow.appendChild(createHead("名稱"));
+			headRow.appendChild(createHead("IR"));
+			headRow.appendChild(createHead("標籤"));
 
-function escape(str) {
-  str = str.replace(/&/g, '&amp;');
-  str = str.replace(/</g, '&lt;');
-  str = str.replace(/>/g, '&gt;');
-  str = str.replace(/"/g, '&quot;');
-  str = str.replace(/'/g, '&#39;');
-  str = str.replace( /[A-Za-z0-9]/g, function(s) {
-    return String.fromCharCode(s.charCodeAt(0) + 65248);
-  });
-  return str;
-}
+			var colCount = 4;
+			if (wep.checked) {
+				headRow.appendChild(createHead("攻撃力"));
+				headRow.appendChild(createHead("魔力"));
+				headRow.appendChild(createHead("命中"));
+				headRow.appendChild(createHead("行動"));
+				headRow.appendChild(createHead("射程"));
+				colCount = 9;
+			}
+			if (arm.checked || she.checked) {
+				headRow.appendChild(createHead("物理防御力"));
+				headRow.appendChild(createHead("魔法防御力"));
+				headRow.appendChild(createHead("行動"));
+				colCount = 7;
+			}
+			if (sup.checked) {
+				headRow.appendChild(createHead("魔力"));
+				headRow.appendChild(createHead("物理防御力"));
+				headRow.appendChild(createHead("魔法防御力"));
+				headRow.appendChild(createHead("行動"));
+				colCount = 8;
+			}
+			//if(bag.checked) {
+			//  headRow.appendChild(createHead("スロット数"));
+			//  headRow.appendChild(createHead("収納制限"));
+			//  colCount = 6;
+			//}
+			if (fod.checked || pot.checked || piz.checked || crd.checked || scr.checked || jem.checked || oth.checked) {
+				headRow.appendChild(createHead("時機"));
+				headRow.appendChild(createHead("對象"));
+				headRow.appendChild(createHead("射程"));
+				headRow.appendChild(createHead("判定"));
+				colCount = 8;
+			}
 
-//重複チェック
-var checkDuplicate = function(array, str){
-  var array = array;
-  var str = str;
-    for(var i =0; i < array.length; i++){
-        if(str == array[i]){
-            return true;
-        }
-    }
-    return false;
-};
+			headRow.appendChild(createHead("價格"));
+			thead.appendChild(headRow);
 
-// 初期化1
-window.onload= function() {
-  
-  var request = new XMLHttpRequest();
-        request.open("GET", "https://banana0229.github.io/LHZSheetViewer/data/zh/items.json", false);
-        request.send();
-        let translationData = JSON.parse(request.responseText);
-        jsonp(translationData)
-};
+			var dispCount = 0;
+			for (var i = 0; i < items.length; i++) {
+				var f1 = 0;
+				var tag = items[i].tags;
+				var tag_s = "";
+				for (var j = 0; j < tag.length; j++) {
+					tag_s += tag[j];
+				}
+				if (efc_c.checked == true) {
+					var str = escape(efec_txt)
+					//if (efec_txt == "") {
+					//continue;
+					//}
+					var re = new RegExp(str, "i");
+					if (items[i].function == null) {
+						continue;
+					}
+					if (!items[i].function.match(re)) {
+						continue;
+					}
+				}
+				if (rcp_c.checked == true) {
+					var str = escape(item_name)
+					var re = new RegExp(str, "i");
+					if (items[i].recipe == null) {
+						continue;
+					}
+					var i_recipe = items[i].recipe
+					if (!i_recipe.match(re)) {
+						continue;
+					}
+				}
+				if (tag_c.checked == true) {
+					if (tag_i == 0) {
+						if (tag.length != 0) {
+							continue;
+						}
+					} else {
+						var re = new RegExp(tag_l[tag_i], "i");
+						if (!tag_s.match(re)) {
+							continue;
+						}
+					}
+				}
+				var ir = items[i].item_rank;
+				for (var j = 0; j < skl_b[skl].length; j++) {
+					var re = new RegExp(skl_b[skl][j], "i");
+					if (tag_s.match(re)) {
+						ir -= 2;
+						break;
+					}
+				}
+				var re = new RegExp("咒藥", "i");
+				if (pms.checked == true && tag_s.match(re) && skl != 4) {
+					ir -= 2;
+				}
+				re = new RegExp("靈符", "i");
+				if (cms.checked == true && tag_s.match(re) && skl != 4) {
+					ir -= 3;
+				}
+				if (cms.checked == true && tag_s.match(re) && skl == 4) {
+					ir -= 1;
+				}
+				if (ir <= 0) {
+					ir = 1;
+				}
+				if (r_cr > ir) {
+					continue;
+				} else if (ir > cr) {
+					continue;
+				}
+				//ラジオボタン関係の検索
+				var type = items[i].type;
+				if (tgc.checked == true) {
+					if (tag_i == 0) {
+						if (tag.length != 0) {
+							continue;
+						}
+					} else {
+						var re = new RegExp(tag_l[tag_i], "i");
+						if (!tag_s.match(re)) {
+							continue;
+						}
+					}
+				} else if (rec.checked == true) {
+					var str = escape(item_name)
+					var re = new RegExp(str, "i");
+					if (items[i].recipe == null) {
+						continue;
+					}
+					var i_recipe = items[i].recipe
+					if (!i_recipe.match(re)) {
+						continue;
+					}
+				} else if (efe.checked == true) {
+					var str = escape(efec_txt)
+					var re = new RegExp(str, "i");
+					if (items[i].function == null) {
+						continue;
+					}
+					if (!items[i].function.match(re)) {
+						continue;
+					}
+				} else {
+					if (type == "武器" && !wep.checked) {
+						continue;
+					}
+					if (type == "防具" && !arm.checked) {
+						continue;
+					}
+					if (type == "盾" && !she.checked) {
+						continue;
+					}
+					if (type == "補助" && !sup.checked) {
+						continue;
+					}
+					if (type == "収納" && !bag.checked) {
+						continue;
+					}
+					if (type == "食物" && !fod.checked) {
+						continue;
+					}
+					if (type == "藥水" && !pot.checked) {
+						continue;
+					}
+					if (type == "咒藥" && !piz.checked) {
+						continue;
+					}
+					if (type == "靈符" && !crd.checked) {
+						continue;
+					}
+					if (type == "卷軸" && !scr.checked) {
+						continue;
+					}
+					if (type == "寶珠" && !jem.checked) {
+						continue;
+					}
+					if (type == "楽器" && !mus.checked) {
+						continue;
+					}
+					if (type == "召喚笛" && !smn.checked) {
+						continue;
+					}
+					if (type == "魔具" && !dep.checked) {
+						continue;
+					}
+					if (type == "その他" && !oth.checked) {
+						continue;
+					}
+				}
+				//例外処理
+				//クラス制限
+				if (type != "補助") {
+					if (cls_eq[cls].length != 0) {
+						for (var j = 0; j < cls_eq[cls].length; j++) {
+							var re = new RegExp(cls_eq[cls][j], "i");
+							if (tag_s.match(re)) {
+								f1 = 1;
+							}
+						}
+					} else {
+						f1 = 1;
+					}
+				} else {
+					f1 = 1;
+				}
+				//特殊アイテム　守護1:武士2:武闘3:施療4:森5:神祇6:暗殺7:刀剣8:吟遊9:妖術10:召喚11:付与12
+				if (type == "武器") {
+					if (items[i].name == "火蜥蜴の牙剣" && cls == 11) {
+						f1 = 1;
+					}
+					if (items[i].name == "蒼き大渦の斧" && cls != 1 && cls != 0) {
+						continue;
+					}
+					if (items[i].name == "強弓・ビートルクロウ" && cls != 2 && cls != 0) {
+						continue;
+					}
+					if (items[i].name == "黒霞の小太刀" && cls != 7 && cls != 0) {
+						continue;
+					}
+					if (items[i].name == "忘れえぬ炎" && cls < 10 && cls != 0) {
+						continue;
+					}
+					if (items[i].name == "魔槍アンバーハート" && cls != 5 && cls != 0) {
+						continue;
+					}
+				} else if (type == "防具") {
+					if (items[i].name == "隠者のローブ" && cls < 10 && cls != 0) {
+						continue;
+					}
+					if (items[i].name == "式神繰りの羽織" && cls != 6 && cls != 0) {
+						continue;
+					}
+					if (items[i].name == "霧かすみの打掛" && cls != 6 && cls != 0) {
+						continue;
+					}
+				} else if (type == "盾") {
+					if (items[i].name == "リーフシールド" && cls == 5) {
+						f1 = 1;
+					}
+				} else if (type == "補助") {
+					if (items[i].name == "アイアンヘルム" && cls != 0 && cls != 1 && cls != 2) {
+						continue;
+					}
+					if (items[i].name == "鉢がね" && cls != 0 && cls != 2 && cls != 3) {
+						continue;
+					}
+					if (items[i].name == "バシネット" && cls != 0 && cls != 1 && cls != 3) {
+						continue;
+					}
+					if (items[i].name == "業師の手甲" && cls != 0 && cls != 7 && cls != 8 && cls != 9) {
+						continue;
+					}
+					if (items[i].name == "大海獣のヒレ兜" && cls > 3) {
+						continue;
+					}
+					if (items[i].name == "黒カブト" && cls != 0 && cls != 1 && cls != 2) {
+						continue;
+					}
+					if (items[i].name == "守護の鉢巻き" && cls != 0 && cls != 2 && cls != 3) {
+						continue;
+					}
+					if (items[i].name == "ソリッドクラウン" && cls != 0 && cls != 1 && cls != 3) {
+						continue;
+					}
+					if (items[i].name == "グレイトヘルム" && cls != 0 && cls != 1 && cls != 2) {
+						continue;
+					}
+					if (items[i].name == "ダ・スクゥインの指輪" && cls != 0 && cls != 11) {
+						continue;
+					}
+					if (items[i].name == "鬼首兜" && cls != 0 && cls != 2 && cls != 3) {
+						continue;
+					}
+				}
+				if (f1 == 0) {
+					continue;
+				}
 
-// 初期化2
-var jsonp = function(data) {
-  items = data.items;
-  tag_list();
-  var tag_box = "";
-  for(var i=0; i<tag_l.length; i++ ){
-    tag_box += "<option value='" + i + "'>" + tag_l[i] + "</option>";
-  }
-  tag_box = "<select id='etc' name='etc' size='1' tabindex='0' onchange='tg_ck();reloadData();'/>" + tag_box + "</select>";
-  //alert(document.getElementById('pre_sets').innerHTML);
-  document.getElementById('tag_list').innerHTML = tag_box;
-  reloadData();
-}
 
-function tag_list() {
-  for(var i=0; i < items.length ;i++){
-    for(var j=0; j<items[i].tags.length ;j++){
-      var tag = items[i].tags[j]
-      if( !checkDuplicate(tagl, tag) ){
-        tagl.push(tag);
-      }
-    }
-  }
-  tagl.sort();
-}
+				var n_ir = items[i].item_rank;
+				var row = document.createElement('tr');
+				if (dispCount % 2 == 0) {
+					if (n_ir <= cr) {
+						row.setAttribute("class", "odd");
+					} else {
+						row.setAttribute("class", "odd_b");
+					}
+				} else if (n_ir > cr) {
+					row.setAttribute("class", "eve_b");
+				}
+				var nameCol = createCol(innerHTML = items[i].name);
+				nameCol.setAttribute("class", "left");
+				row.appendChild(nameCol);
+				row.appendChild(createCol(innerHTML = items[i].item_rank));
+				var tagCol = createCol(innerHTML = items[i].tags);
+				tagCol.setAttribute("class", "left");
+				row.appendChild(tagCol);
 
-function reset_all() {
+				if (wep.checked) {
+					row.appendChild(createCol(innerHTML = items[i].physical_attack));
+					row.appendChild(createCol(innerHTML = items[i].magic_attack));
+					row.appendChild(createCol(innerHTML = items[i].hit));
+					row.appendChild(createCol(innerHTML = items[i].action));
+					row.appendChild(createCol(innerHTML = items[i].range));
+				}
+				if (arm.checked || she.checked) {
+					row.appendChild(createCol(innerHTML = items[i].physical_defense));
+					row.appendChild(createCol(innerHTML = items[i].magic_defense));
+					row.appendChild(createCol(innerHTML = items[i].action));
+				}
+				if (sup.checked) {
+					row.appendChild(createCol(innerHTML = items[i].magic_attack));
+					row.appendChild(createCol(innerHTML = items[i].physical_defense));
+					row.appendChild(createCol(innerHTML = items[i].magic_defense));
+					row.appendChild(createCol(innerHTML = items[i].action));
+				}
+				//if(bag.checked) {
+				//  row.appendChild(createCol("no data"));
+				//  row.appendChild(createCol("no data"));
+				//}
+				if (fod.checked || pot.checked || piz.checked || crd.checked || scr.checked || jem.checked || oth.checked) {
+					row.appendChild(createCol(innerHTML = items[i].timing));
+					row.appendChild(createCol(innerHTML = items[i].target));
+					row.appendChild(createCol(innerHTML = items[i].range));
+					row.appendChild(createCol(innerHTML = items[i].roll));
+				}
+				row.appendChild(createCol(innerHTML = items[i].price));
+				tbody.appendChild(row);
 
-  document.getElementById('wep').checked = true;
-  document.getElementById('CR').selectedIndex = 29;
-  document.getElementById('r_CR').selectedIndex = 0;
-  document.getElementById('cls').selectedIndex = 0;
-  document.getElementById('skl').selectedIndex = 0;
-  document.getElementById('pms').checked = false;
-  document.getElementById('cms').checked = false;
-  document.getElementById('fct').checked = false;
-  document.getElementById('rcp').checked = false;
-  document.getElementById('tag').checked = false;
-  document.getElementById('etc').selectedIndex = 0;
-  document.getElementById('rcp_s').checked = false;
-  document.getElementById('item_name').value = "";
-  document.getElementById('efc_s').checked = false;
-  document.getElementById('efec_txt').value = "";
-  reloadData();
-}
-</script>
+				if (fct.checked || (rcp.checked && items[i].recipe != null)) {
+					var row2 = document.createElement('tr');
+					if (dispCount % 2 == 0) {
+						if (n_ir <= cr) {
+							row2.setAttribute("class", "odd");
+						} else {
+							row2.setAttribute("class", "odd_b");
+						}
+					} else if (n_ir > cr) {
+						row2.setAttribute("class", "eve_b");
+					}
+					var functionCol = document.createElement('td');
+					functionCol.setAttribute("colspan", colCount);
+					functionCol.setAttribute("class", "left multiLine");
+					var funtionText = "";
+					var recipeText = "";
+					if (fct.checked) {
+						funtionText = "<p>効果・解説：" + items[i].function + "</p>";
+					}
+					if (rcp.checked && items[i].recipe != null) {
+						recipeText = "<p>レシピ：" + items[i].recipe + "</p>";
+					}
+					functionCol.innerHTML = funtionText + recipeText;
+					row2.appendChild(functionCol);
+					tbody.appendChild(row2);
+				}
+
+				dispCount++;
+			}
+		}
+
+		function createHead(contents) {
+			var col = document.createElement('th');
+			col.innerHTML = contents;
+			return col;
+		}
+
+		function createCol(contents) {
+			var col = document.createElement('td');
+			col.innerHTML = contents;
+			return col;
+		}
+
+		function escape(str) {
+			str = str.replace(/&/g, '&amp;');
+			str = str.replace(/</g, '&lt;');
+			str = str.replace(/>/g, '&gt;');
+			str = str.replace(/"/g, '&quot;');
+			str = str.replace(/'/g, '&#39;');
+			str = str.replace(/[A-Za-z0-9]/g, function (s) {
+				return String.fromCharCode(s.charCodeAt(0) + 65248);
+			});
+			return str;
+		}
+
+		//重複チェック
+		var checkDuplicate = function (array, str) {
+			var array = array;
+			var str = str;
+			for (var i = 0; i < array.length; i++) {
+				if (str == array[i]) {
+					return true;
+				}
+			}
+			return false;
+		};
+
+		// 初期化1
+		window.onload = function () {
+
+			var request = new XMLHttpRequest();
+			request.open("GET", "https://banana0229.github.io/LHZSheetViewer/data/zh/items.json", false);
+			request.send();
+			let translationData = JSON.parse(request.responseText);
+			jsonp(translationData)
+		};
+
+		// 初期化2
+		var jsonp = function (data) {
+			items = data.items;
+			tag_list();
+			var tag_box = "";
+			for (var i = 0; i < tag_l.length; i++) {
+				tag_box += "<option value='" + i + "'>" + tag_l[i] + "</option>";
+			}
+			tag_box = "<select id='etc' name='etc' size='1' tabindex='0' onchange='tg_ck();reloadData();'/>" + tag_box + "</select>";
+			//alert(document.getElementById('pre_sets').innerHTML);
+			document.getElementById('tag_list').innerHTML = tag_box;
+			reloadData();
+		}
+
+		function tag_list() {
+			for (var i = 0; i < items.length; i++) {
+				for (var j = 0; j < items[i].tags.length; j++) {
+					var tag = items[i].tags[j]
+					if (!checkDuplicate(tagl, tag)) {
+						tagl.push(tag);
+					}
+				}
+			}
+			tagl.sort();
+		}
+
+		function reset_all() {
+
+			document.getElementById('wep').checked = true;
+			document.getElementById('CR').selectedIndex = 29;
+			document.getElementById('r_CR').selectedIndex = 0;
+			document.getElementById('cls').selectedIndex = 0;
+			document.getElementById('skl').selectedIndex = 0;
+			document.getElementById('pms').checked = false;
+			document.getElementById('cms').checked = false;
+			document.getElementById('fct').checked = false;
+			document.getElementById('rcp').checked = false;
+			document.getElementById('tag').checked = false;
+			document.getElementById('etc').selectedIndex = 0;
+			document.getElementById('rcp_s').checked = false;
+			document.getElementById('item_name').value = "";
+			document.getElementById('efc_s').checked = false;
+			document.getElementById('efec_txt').value = "";
+			reloadData();
+		}
+	</script>
