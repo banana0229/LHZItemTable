@@ -413,42 +413,43 @@
 			var headRow = document.createElement('tr');
 
 			headRow.appendChild(createHead("名稱"));
+			headRow.appendChild(createHead("日文"));
 			headRow.appendChild(createHead("IR"));
 			headRow.appendChild(createHead("標籤"));
 
-			var colCount = 4;
+			var colCount = 5;
 			if (wep.checked) {
 				headRow.appendChild(createHead("攻撃力"));
 				headRow.appendChild(createHead("魔力"));
 				headRow.appendChild(createHead("命中"));
 				headRow.appendChild(createHead("行動"));
 				headRow.appendChild(createHead("射程"));
-				colCount = 9;
+				colCount += 5;
 			}
 			if (arm.checked || she.checked) {
 				headRow.appendChild(createHead("物理防御力"));
 				headRow.appendChild(createHead("魔法防御力"));
 				headRow.appendChild(createHead("行動"));
-				colCount = 7;
+				colCount += 3;
 			}
 			if (sup.checked) {
 				headRow.appendChild(createHead("魔力"));
 				headRow.appendChild(createHead("物理防御力"));
 				headRow.appendChild(createHead("魔法防御力"));
 				headRow.appendChild(createHead("行動"));
-				colCount = 8;
+				colCount += 4;
 			}
 			//if(bag.checked) {
 			//  headRow.appendChild(createHead("スロット数"));
 			//  headRow.appendChild(createHead("収納制限"));
-			//  colCount = 6;
+			//  colCount += 2;
 			//}
 			if (fod.checked || pot.checked || piz.checked || crd.checked || scr.checked || jem.checked || oth.checked) {
 				headRow.appendChild(createHead("時機"));
 				headRow.appendChild(createHead("對象"));
 				headRow.appendChild(createHead("射程"));
 				headRow.appendChild(createHead("判定"));
-				colCount = 8;
+				colCount += 4;
 			}
 
 			headRow.appendChild(createHead("價格"));
@@ -705,9 +706,19 @@
 				} else if (n_ir > cr) {
 					row.setAttribute("class", "eve_b");
 				}
-				var nameCol = createCol(innerHTML = items[i].name);
+				
+				let item_names = split_translation(items[i].name);
+				let jp_name = item_names[0];
+				let zh_name = item_names[1];
+
+				var nameCol = createCol(innerHTML = zh_name);
 				nameCol.setAttribute("class", "left");
 				row.appendChild(nameCol);
+
+				var name2Col = createCol(innerHTML = jp_name);
+				name2Col.setAttribute("class", "left");
+				row.appendChild(name2Col);
+
 				row.appendChild(createCol(innerHTML = items[i].item_rank));
 				var tagCol = createCol(innerHTML = items[i].tags);
 				tagCol.setAttribute("class", "left");
@@ -845,6 +856,40 @@
 				}
 			}
 			tagl.sort();
+		}
+
+		function split_translation(mixed_str) {
+			if (typeof mixed_str === 'string') {
+				let start_index = 0;
+				let end_index = mixed_str.length - 1;
+				let leftCount = 0;
+				let rightCount = 0;
+
+				for (var i = mixed_str.length - 1; i >= 0; i--) {
+					if (mixed_str[i] == ')') {
+						leftCount++;
+						if (leftCount == 1) {
+							end_index = i;
+						}
+					}
+					else if (mixed_str[i] == '(') {
+						rightCount++;
+						if (rightCount == leftCount) {
+							start_index = i;
+							break;
+						}
+					}
+				}
+				let original = start_index != 0 ? mixed_str.substring(start_index + 1, end_index) : mixed_str;
+				let translated = start_index != 0 ? mixed_str.substring(0, start_index) : mixed_str;
+
+				if(original.match(/^(.|..)級$/g))
+				{
+					return [mixed_str, mixed_str];
+				}
+				return [original, translated];
+			}
+			return undefined;
 		}
 
 		function reset_all() {
