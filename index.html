@@ -204,12 +204,12 @@
 					<label><input name="type" id="crd" type="radio" onchange="reloadData();"> 靈符</label>&nbsp;
 					<label><input name="type" id="scr" type="radio" onchange="reloadData();"> 卷軸</label>&nbsp;
 					<label><input name="type" id="jem" type="radio" onchange="reloadData();"> 寶珠</label>&nbsp;
-					<label><input name="type" id="mus" type="radio" onchange="reloadData();"> 楽器</label>&nbsp;
+					<label><input name="type" id="mus" type="radio" onchange="reloadData();"> 樂器</label>&nbsp;
 					<label><input name="type" id="smn" type="radio" onchange="reloadData();"> 召喚笛</label>&nbsp;
 					<label><input name="type" id="dep" type="radio" onchange="reloadData();"> 魔具</label>&nbsp;
-					<label><input name="type" id="oth" type="radio" onchange="reloadData();"> その他</label>&nbsp;
+					<label><input name="type" id="oth" type="radio" onchange="reloadData();"> 其他</label>&nbsp;
 					<br>
-					<label><input name="type" id="tgc" type="radio" onchange="reloadData();"> タグ</label>&nbsp;
+					<label><input name="type" id="tgc" type="radio" onchange="reloadData();"> 標籤</label>&nbsp;
 					<label><span id="tag_list"><select id="etc" name="etc" size="1" tabindex="0"
 								onchange="tg_ck();reloadData();">
 								<option value="0"></option>
@@ -302,7 +302,7 @@
 		var tagl = [""];
 		var timer1;
 
-		var tag_l = ["", "雙手", "單手", "刀", "劍", "弓", "投擲", "格闘", "槌斧", "杖", "槍", "鞭", "輕量", "楽器", "重鎧", "中鎧", "軽鎧", "盾", "輔助裝備", "頭部", "腕部", "腳部", "外套", "包包", "魔石", "消耗品", "食物", "寶珠", "卷軸", "藥水", "咒藥", "靈符", "召喚笛", "魔具", "光輝", "邪毒", "火炎", "冷気", "電撃", "精神", "偵察", "準備", "召喚", "刺繍", "非賣品", "M2", "M4", "M5", "M6", "不可交易"];
+		var tag_l = ["", "雙手", "單手", "刀", "劍", "弓", "投擲", "格闘", "槌斧", "杖", "槍", "鞭", "輕量", "樂器", "重鎧", "中鎧", "軽鎧", "盾", "輔助裝備", "頭部", "腕部", "腳部", "外套", "包包", "魔石", "消耗品", "食物", "寶珠", "卷軸", "藥水", "咒藥", "靈符", "召喚笛", "魔具", "光輝", "邪毒", "火炎", "冷気", "電撃", "精神", "偵察", "準備", "召喚", "刺繍", "非賣品", "M2", "M4", "M5", "M6", "不可交易"];
 
 		function tm_start() {
 			timer1 = setInterval("reloadData()", 1000);
@@ -377,7 +377,7 @@
 				["刀", "弓", "軽鎧"],
 				["劍", "刀", "鞭", "弓", "中鎧", "軽鎧"],
 				["劍", "槌斧", "鞭", "投擲", "盾", "中鎧", "軽鎧"],
-				["劍", "槍", "槌斧", "鞭", "弓", "楽器", "中鎧", "軽鎧"],
+				["劍", "槍", "槌斧", "鞭", "弓", "樂器", "中鎧", "軽鎧"],
 				["杖", "輕量", "軽鎧"],
 				["杖", "鞭", "輕量", "軽鎧"],
 				["杖", "輕量", "軽鎧"]
@@ -387,7 +387,7 @@
 
 			var skl_b = [
 				[],
-				["劍", "刀", "槍", "槌斧", "鞭", "格闘", "弓", "投擲", "楽器", "輕量"],
+				["劍", "刀", "槍", "槌斧", "鞭", "格闘", "弓", "投擲", "樂器", "輕量"],
 				["片手", "中鎧"],
 				["重鎧", "中鎧", "盾"],
 				["咒藥", "靈符", "卷軸", "寶珠"],
@@ -592,7 +592,7 @@
 					if (type == "寶珠" && !jem.checked) {
 						continue;
 					}
-					if (type == "楽器" && !mus.checked) {
+					if (type == "樂器" && !mus.checked) {
 						continue;
 					}
 					if (type == "召喚笛" && !smn.checked) {
