@@ -180,18 +180,18 @@
 							<option>付与術師</option>
 						</select></label>&nbsp;
 					<label>&nbsp;特技增幅：<select name="skl" id="skl" onchange="reloadData();">
-							<option selected="">なし</option>
-							<option>カスタムウェポン</option>
-							<option>エルヴンアカンプリスメント</option>
-							<option>ドワーヴンアーマメンツ</option>
-							<option>プログレッシブレリック</option>
-							<option>スタイリッシュテイル</option>
-							<option>ハンティングアタイア</option>
-							<option>狐の偽装虎衣</option>
-							<option>タリスモンガー</option>
+							<option selected="">無</option>
+							<option>訂做武器</option>
+							<option>精靈族的才能</option>
+							<option>矮人重裝甲</option>
+							<option>卓越古器</option>
+							<option>時髦尾巴</option>
+							<option>狩獵裝束</option>
+							<option>狐假虎威</option>
+							<option>導具處理者</option>
 						</select></label>&nbsp;
-					<label><input id="pms" type="checkbox" onchange="reloadData();"> ポイズンマスタリー</label>&nbsp;
-					<label><input id="cms" type="checkbox" onchange="reloadData();"> カードマスタリー(SL3)</label>&nbsp;<br>
+					<label><input id="pms" type="checkbox" onchange="reloadData();"> 毒藥精通</label>&nbsp;
+					<label><input id="cms" type="checkbox" onchange="reloadData();"> 靈符精通(SR3)</label>&nbsp;<br>
 					<label><input name="type" id="wep" type="radio" checked="" onchange="reloadData();">
 						武器</label>&nbsp;
 					<label><input name="type" id="arm" type="radio" onchange="reloadData();"> 防具</label>&nbsp;
@@ -635,7 +635,8 @@
 					if (items[i].name == "黒霞の小太刀" && cls != 7 && cls != 0) {
 						continue;
 					}
-					if (items[i].name == "忘れえぬ炎" && cls < 10 && cls != 0) {
+					//忘れえぬ炎
+					if (items[i].id == 113 && cls < 10 && cls != 0) {
 						continue;
 					}
 					if (items[i].name == "魔槍アンバーハート" && cls != 5 && cls != 0) {
