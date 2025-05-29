@@ -623,23 +623,28 @@
 				}
 				//特殊アイテム　守護1:武士2:武闘3:施療4:森5:神祇6:暗殺7:刀剣8:吟遊9:妖術10:召喚11:付与12
 				if (type == "武器") {
-					if (items[i].name == "火蜥蜴の牙剣" && cls == 11) {
+					//火蜥蜴の牙剣
+					if (items[i].id == 96 && cls == 11) {
 						f1 = 1;
 					}
-					if (items[i].name == "蒼き大渦の斧" && cls != 1 && cls != 0) {
+					//蒼き大渦の斧
+					if (items[i].id == 100 && cls != 1 && cls != 0) {
 						continue;
 					}
-					if (items[i].name == "強弓・ビートルクロウ" && cls != 2 && cls != 0) {
+					//強弓・ビートルクロウ
+					if (items[i].id == 106 && cls != 2 && cls != 0) {
 						continue;
 					}
-					if (items[i].name == "黒霞の小太刀" && cls != 7 && cls != 0) {
+					//黒霞の小太刀
+					if (items[i].id == 107 && cls != 7 && cls != 0) {
 						continue;
 					}
 					//忘れえぬ炎
 					if (items[i].id == 113 && cls < 10 && cls != 0) {
 						continue;
 					}
-					if (items[i].name == "魔槍アンバーハート" && cls != 5 && cls != 0) {
+					//魔槍アンバーハート
+					if (items[i].id == 242 && cls != 5 && cls != 0) {
 						continue;
 					}
 				} else if (type == "防具") {
