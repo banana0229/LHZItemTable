@@ -810,7 +810,7 @@
 				}
 				//例外処理
 				//クラス制限
-				if (type != "輔助") {
+				if (type == "武器" || type == "防具" || type == "盾") {
 					if (cls_eq[cls].length != 0) {
 						for (var j = 0; j < cls_eq[cls].length; j++) {
 							var re = new RegExp(cls_eq[cls][j], "i");
