@@ -12,7 +12,32 @@
 			line-height: 1.5em;
 			color: #222;
 		}
+		
+		.modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.modal-window {
+			background: #fff;
+			padding: 20px;
+			border-radius: 5px;
+		}
 
+		.modal-content {
+			margin-top: 10px;
+		}
+
+		.modal.show {
+			display: flex;
+		}
 		a:link,
 		a:visited,
 		a:link,
@@ -93,6 +118,184 @@
 	該工具為以<a href="https://unonek.sakura.ne.jp/lh/item.html">[LHTRPG アイテム検索]</a>為基礎，進行修改的中文版本。<br />
 	目前還在開發中，翻譯資料在遙遠的未來將會補上。<br />
 
+	
+	<!--<input type="button" name="open_upload" value="匯入自訂道具" onMouseUp="open_upload_modal()">&nbsp;
+	<input type="button" name="download" value="匯出自訂道具" onMouseUp="output_current_custom_items()">&nbsp;
+	<input type="button" name="clear_upload" value="清除匯入道具" onMouseUp="clear_uploaded_data()">&nbsp;<br />
+	-->
+	<div id="modal" class="modal">
+		<div class="modal-window">
+			<!--
+			<div class="setting">
+				<label><input id="manual_mode_setting" type="checkbox" onchange="switchUploadMode()" style="
+					width: 18px; height: 18px" />手動模式</label><br>
+			</div>
+			<label><input id="fileInput" type="file" accept=".json"></label>
+			-->
+			<table id="manual_mode" class="option hidden">
+				<tr>
+					<th colspan="2">手動設定</th>
+				</tr>
+				<tr>
+					<td>道具名</td>
+					<td class="left">
+						<label><input id="custom_item_name" type="text" size="25" value=""></label>
+					</td>
+				</tr>
+				<tr>
+					<td>標籤</td>
+					<td class="left">
+						<label><input id="custom_tags" type="text" size="60" value="">&nbsp;(標籤間請以「,」來分隔)</label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>類別</td>
+					<td class="left" id="type_group">
+						<label><input type="radio" name="type" value="武器" checked> 武器</label>
+						<label><input type="radio" name="type" value="防具"> 防具</label>
+						<label><input type="radio" name="type" value="盾"> 盾</label>
+						<label><input type="radio" name="type" value="輔助"> 輔助</label>
+						<label><input type="radio" name="type" value="收納"> 收納</label>
+						<label><input type="radio" name="type" value="食物"> 食物</label>
+						<label><input type="radio" name="type" value="藥水"> 藥水</label>
+						<label><input type="radio" name="type" value="咒藥"> 咒藥</label>
+						<label><input type="radio" name="type" value="靈符"> 靈符</label>
+						<label><input type="radio" name="type" value="卷軸"> 卷軸</label>
+						<label><input type="radio" name="type" value="寶珠"> 寶珠</label>
+						<label><input type="radio" name="type" value="樂器"> 樂器</label>
+						<label><input type="radio" name="type" value="召喚笛"> 召喚笛</label>
+						<label><input type="radio" name="type" value="魔具"> 魔具</label>
+						<label><input type="radio" name="type" value="其它"> 其它</label><br>
+					</td>
+				</tr>
+
+				<tr>
+					<td>IR</td>
+					<td class="left">
+						<label><input id="custom_item_rank" type="number" min="0" max="99" style="width: 60px;" value=""
+								oninput="let IR = parseInt(this.value, 10); this.value = !!this.value && !isNaN(IR) && IR >= 1 ? (IR < 99 ? IR : 99) : null"></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>攻擊力</td>
+					<td class="left">
+						<label><input id="custom_physical_attack" type="number" min="-99" max="99" style="width: 60px;" value=""
+								oninput="let atk = parseInt(this.value, 10); this.value = !!this.value && !isNaN(atk) ? (atk < 99 ? atk : 99) : null"></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>魔力</td>
+					<td class="left">
+						<label><input id="custom_magic_attack" type="number" min="-99" max="99" style="width: 60px;" value=""
+								oninput="let m_atk = parseInt(this.value, 10); this.value = !!this.value && !isNaN(m_atk) ? (m_atk < 99 ? m_atk : 99) : null"></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>物理防禦力</td>
+					<td class="left">
+						<label><input id="custom_physical_defense" type="number" min="-99" max="99" style="width: 60px;" value=""
+								oninput="let def = parseInt(this.value, 10); this.value = !!this.value && !isNaN(def) ? (def < 99 ? def : 99) : null"></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>魔法防禦力</td>
+					<td class="left">
+						<label><input id="custom_magic_defense" type="number" min="-99" max="99" style="width: 60px;" value=""
+								oninput="let m_def = parseInt(this.value, 10); this.value = !!this.value && !isNaN(m_def) ? (m_def < 99 ? m_def : 99) : null"></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>命中</td>
+					<td class="left">
+						<label><input id="custom_hit" type="number" min="-99" max="99" style="width: 60px;" value=""
+								oninput="let hit = parseInt(this.value, 10); this.value = !!this.value && !isNaN(hit) ? (hit < 99 ? hit : 99) : null"></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>行動</td>
+					<td class="left">
+						<label><input id="custom_action" type="number" min="-99" max="99" style="width: 60px;" value=""
+								oninput="let act = parseInt(this.value, 10); this.value = !!this.value && !isNaN(act) ? (act < 99 ? act : 99) : null"></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>時機</td>
+					<td class="left" id="timing_group">
+						<label><input type="radio" name="timing" value="常駐" checked> 常駐</label>
+						<label><input type="radio" name="timing" value="設置階段"> 設置階段</label>
+						<label><input type="radio" name="timing" value="先攻階段"> 先攻階段</label>
+						<label><input type="radio" name="timing" value="移動動作"> 移動動作</label>
+						<label><input type="radio" name="timing" value="次要動作"> 次要動作</label>
+						<label><input type="radio" name="timing" value="主要動作"> 主要動作</label>
+						<label><input type="radio" name="timing" value="行動"> 行動</label>
+						<label><input type="radio" name="timing" value="即時動作"> 即時動作</label><br>
+						<label><input type="radio" name="timing" value="傷害骰"> 傷害骰</label>
+						<label><input type="radio" name="timing" value="承受傷害前"> 承受傷害前</label>
+						<label><input type="radio" name="timing" value="承受傷害後"> 承受傷害後</label>
+						<label><input type="radio" name="timing" value="判定前"> 判定前</label>
+						<label><input type="radio" name="timing" value="判定後"> 判定後</label>
+						<label><input type="radio" name="timing" value="清除階段"> 清除階段</label>
+						<label><input type="radio" name="timing" value="跑團前"> 跑團前</label><br>
+						<label><input type="radio" name="timing" value="簡令階段"> 簡令階段</label>
+						<label><input type="radio" name="timing" value="見下文"> 見下文</label>
+						<label><input type="radio" name="timing" value="休息階段"> 休息階段</label>
+					</td>
+				</tr>
+				<tr>
+					<td>判定</td>
+					<td class="left">
+						<label><input id="custom_roll" type="text" size="25" value=""></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>對象</td>
+					<td class="left">
+						<label><input id="custom_target" type="text" size="25" value=""></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>射程</td>
+					<td class="left" id="range_group">
+						<label><input type="radio" name="range" value="至近" checked> 至近</label>
+						<label><input type="radio" name="range" value="1Sq"> 1Sq</label>
+						<label><input type="radio" name="range" value="2Sq"> 2Sq</label>
+						<label><input type="radio" name="range" value="4Sq"> 4Sq</label>
+						<label><input type="radio" name="range" value="5Sq"> 5Sq</label>
+						<label><input type="radio" name="range" value="6Sq"> 6Sq</label>
+						<label><input type="radio" name="range" value="20Sq"> 20Sq</label>
+						<label><input type="radio" name="range" value="見下文"> 見下文</label>
+						<label><input type="radio" id="custom_range_c" name="range" value="custom_value"> 自訂:</label>
+						<label><input type="text" id="custom_range" size="10" value=""
+								onfocus="document.getElementById('custom_range_c').checked = true;"></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>價格</td>
+					<td class="left">
+						<label><input id="custom_price" type="number" min="0" max="999999" style="width: 60px;" value=""
+								oninput="let price = parseInt(this.value, 10); this.value = !!this.value && !isNaN(act) ? (act < 999999 ? act : 999999) : null"></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>效果/解說</td>
+					<td class="left">
+						<label><textarea id="custom_function"
+								style="width: 360px; height: 90px; resize:none;"></textarea></label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>配方</td>
+					<td class="left">
+						<label><textarea id="custom_recipe"
+								style="width: 360px; height: 90px; resize:none;"></textarea></label><br>
+					</td>
+				</tr>
+			</table>
+			<button id="confirmBtn" disabled>確認</button>
+			<button id="cancelBtn">取消</button>
+		</div>
+	</div>
+
 	<table>
 		<tbody>
 			<tr>
@@ -166,18 +369,18 @@
 						</select></label>&nbsp;
 					<label>&nbsp;主職業:<select name="cls" id="cls" onchange="reloadData();">
 							<option selected="">　</option>
-							<option>守護戦士</option>
+							<option>守護戰士</option>
 							<option>武士</option>
-							<option>武闘家</option>
-							<option>施療神官</option>
-							<option>森呪遣い</option>
-							<option>神祇官</option>
-							<option>暗殺者</option>
-							<option>盗剣士</option>
+							<option>武鬥家</option>
+							<option>牧師</option>
+							<option>德魯伊</option>
+							<option>神官</option>
+							<option>刺客</option>
+							<option>盜劍士</option>
 							<option>吟遊詩人</option>
 							<option>妖術師</option>
 							<option>召喚術師</option>
-							<option>付与術師</option>
+							<option>賦予術師</option>
 						</select></label>&nbsp;
 					<label>&nbsp;特技增幅：<select name="skl" id="skl" onchange="reloadData();">
 							<option selected="">無</option>
@@ -196,7 +399,7 @@
 						武器</label>&nbsp;
 					<label><input name="type" id="arm" type="radio" onchange="reloadData();"> 防具</label>&nbsp;
 					<label><input name="type" id="she" type="radio" onchange="reloadData();"> 盾</label>&nbsp;
-					<label><input name="type" id="sup" type="radio" onchange="reloadData();"> 補助</label>&nbsp;
+					<label><input name="type" id="sup" type="radio" onchange="reloadData();"> 輔助</label>&nbsp;
 					<label><input name="type" id="bag" type="radio" onchange="reloadData();"> 収納</label>&nbsp;
 					<label><input name="type" id="fod" type="radio" onchange="reloadData();"> 食物</label>&nbsp;
 					<label><input name="type" id="pot" type="radio" onchange="reloadData();"> 藥水</label>&nbsp;
@@ -230,7 +433,7 @@
 								<option value="15">中鎧</option>
 								<option value="16">軽鎧</option>
 								<option value="17">盾</option>
-								<option value="18">補助装備</option>
+								<option value="18">輔助装備</option>
 								<option value="19">頭部</option>
 								<option value="20">腕部</option>
 								<option value="21">脚部</option>
@@ -277,7 +480,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<input type="button" name="r_all" value="検索条件初期化" onmouseup="reset_all()">&nbsp;<br>
+	<input type="button" name="r_all" value="清空" onmouseup="reset_all()">&nbsp;<br>
 	<table>
 		<thead id="tablehead">
 			<tr>
@@ -568,7 +771,7 @@
 					if (type == "盾" && !she.checked) {
 						continue;
 					}
-					if (type == "補助" && !sup.checked) {
+					if (type == "輔助" && !sup.checked) {
 						continue;
 					}
 					if (type == "収納" && !bag.checked) {
@@ -607,7 +810,7 @@
 				}
 				//例外処理
 				//クラス制限
-				if (type != "補助") {
+				if (type != "輔助") {
 					if (cls_eq[cls].length != 0) {
 						for (var j = 0; j < cls_eq[cls].length; j++) {
 							var re = new RegExp(cls_eq[cls][j], "i");
@@ -648,51 +851,66 @@
 						continue;
 					}
 				} else if (type == "防具") {
-					if (items[i].name == "隠者のローブ" && cls < 10 && cls != 0) {
+					//隠者のローブ
+					if (items[i].id == 320 && cls < 10 && cls != 0) {
 						continue;
 					}
-					if (items[i].name == "式神繰りの羽織" && cls != 6 && cls != 0) {
+					//式神繰りの羽織
+					if (items[i].id == 325 && cls != 6 && cls != 0) {
 						continue;
 					}
-					if (items[i].name == "霧かすみの打掛" && cls != 6 && cls != 0) {
+					//霧かすみの打掛
+					if (items[i].id == 326 && cls != 6 && cls != 0) {
 						continue;
 					}
 				} else if (type == "盾") {
-					if (items[i].name == "リーフシールド" && cls == 5) {
+					//リーフシールド
+					if (items[i].id == 406 && cls == 5) {
 						f1 = 1;
 					}
-				} else if (type == "補助") {
-					if (items[i].name == "アイアンヘルム" && cls != 0 && cls != 1 && cls != 2) {
+				} else if (type == "輔助") {
+					//アイアンヘルム
+					if (items[i].id == 504 && cls != 0 && cls != 1 && cls != 2) {
 						continue;
 					}
-					if (items[i].name == "鉢がね" && cls != 0 && cls != 2 && cls != 3) {
+					//鉢がね
+					if (items[i].id == 505 && cls != 0 && cls != 2 && cls != 3) {
 						continue;
 					}
-					if (items[i].name == "バシネット" && cls != 0 && cls != 1 && cls != 3) {
+					//バシネット
+					if (items[i].id == 506 && cls != 0 && cls != 1 && cls != 3) {
 						continue;
 					}
-					if (items[i].name == "業師の手甲" && cls != 0 && cls != 7 && cls != 8 && cls != 9) {
+					//業師の手甲
+					if (items[i].id == 550 && cls != 0 && cls != 7 && cls != 8 && cls != 9) {
 						continue;
 					}
-					if (items[i].name == "大海獣のヒレ兜" && cls > 3) {
+					//大海獣のヒレ兜
+					if (items[i].id == 569 && cls > 3) {
 						continue;
 					}
-					if (items[i].name == "黒カブト" && cls != 0 && cls != 1 && cls != 2) {
+					//黒カブト
+					if (items[i].id == 580 && cls != 0 && cls != 1 && cls != 2) {
 						continue;
 					}
-					if (items[i].name == "守護の鉢巻き" && cls != 0 && cls != 2 && cls != 3) {
+					//守護の鉢巻き
+					if (items[i].id == 581 && cls != 0 && cls != 2 && cls != 3) {
 						continue;
 					}
-					if (items[i].name == "ソリッドクラウン" && cls != 0 && cls != 1 && cls != 3) {
+					//ソリッドクラウン
+					if (items[i].id == 582 && cls != 0 && cls != 1 && cls != 3) {
 						continue;
 					}
-					if (items[i].name == "グレイトヘルム" && cls != 0 && cls != 1 && cls != 2) {
+					//グレイトヘルム
+					if (items[i].id == 583 && cls != 0 && cls != 1 && cls != 2) {
 						continue;
 					}
-					if (items[i].name == "ダ・スクゥインの指輪" && cls != 0 && cls != 11) {
+					//ダ・スクゥインの指輪
+					if (items[i].id == 645 && cls != 0 && cls != 11) {
 						continue;
 					}
-					if (items[i].name == "鬼首兜" && cls != 0 && cls != 2 && cls != 3) {
+					//鬼首兜
+					if (items[i].id == 646 && cls != 0 && cls != 2 && cls != 3) {
 						continue;
 					}
 				}
@@ -917,4 +1135,81 @@
 			document.getElementById('efec_txt').value = "";
 			reloadData();
 		}
+
+		function open_upload_modal() {
+			document.getElementById('modal').classList.add('show');
+		}
+		
+		function close_upload_modal() {
+			//隱藏彈窗
+			document.getElementById('modal').classList.remove('show');
+			//關閉確認
+			document.getElementById('confirmBtn').disabled = true;
+			//清除設定
+			//document.getElementById('fileInput').value = '';
+			//document.getElementById('typeSelect').value = "skills";
+			clearManualInputValue();
+		}
+
+		function clearManualInputValue() {
+			clearRadioValue("type");
+			setCustomValue("item_name", "");
+			setCustomValue("item_rank", "");
+			setCustomValue("physical_attack", "");
+			setCustomValue("magic_attack", "");
+			setCustomValue("physical_defense", "");
+			setCustomValue("magic_defense", "");
+			setCustomValue("hit", "");
+			setCustomValue("action", "");
+			clearRadioValue("timing");
+			setCustomValue("roll", "");
+			setCustomValue("target", "");
+			clearRadioValue("range");
+			setCustomValue("range", "");
+			setCustomValue("price", "");
+			setCustomValue("tags", "");
+			setCustomValue("function", "");
+			setCustomValue("recipe", "");
+		}
+
+		function clearRadioValue(name) {
+			var ele = document.getElementsByName(name);
+
+			for (i = 0; i < ele.length; i++) {
+				ele[i].checked = true;
+				return;
+			}
+		}
+
+		function getCustomValue(type) {
+			var ele = document.getElementById(`custom_${type}`);
+
+			if (ele) {
+				return ele.value;
+			}
+			return null;
+		}
+
+		function setCustomValue(type, value) {
+			var ele = document.getElementById(`custom_${type}`);
+
+			if (ele) {
+				ele.value = value;
+			}
+		}
+
+		document.getElementById('custom_item_name').addEventListener('input', function () {
+			//有道具名稱才能確認
+			let confirmBtn = document.getElementById('confirmBtn');
+			confirmBtn.disabled = !(this.value !== "");
+		});
+
+		//取消
+		document.getElementById('cancelBtn').addEventListener('click', function () {
+			close_upload_modal();
+		});
+		//確認
+		document.getElementById('confirmBtn').addEventListener('click', function () {
+			alert('上傳失敗\n請重新檢查格式\nTODO:正式上傳');
+		});
 	</script>
