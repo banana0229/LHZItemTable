@@ -400,7 +400,7 @@
 					<label><input name="type" id="arm" type="radio" onchange="reloadData();"> 防具</label>&nbsp;
 					<label><input name="type" id="she" type="radio" onchange="reloadData();"> 盾</label>&nbsp;
 					<label><input name="type" id="sup" type="radio" onchange="reloadData();"> 輔助</label>&nbsp;
-					<label><input name="type" id="bag" type="radio" onchange="reloadData();"> 収納</label>&nbsp;
+					<label><input name="type" id="bag" type="radio" onchange="reloadData();"> 收納</label>&nbsp;
 					<label><input name="type" id="fod" type="radio" onchange="reloadData();"> 食物</label>&nbsp;
 					<label><input name="type" id="pot" type="radio" onchange="reloadData();"> 藥水</label>&nbsp;
 					<label><input name="type" id="piz" type="radio" onchange="reloadData();"> 咒藥</label>&nbsp;
@@ -774,7 +774,7 @@
 					if (type == "輔助" && !sup.checked) {
 						continue;
 					}
-					if (type == "収納" && !bag.checked) {
+					if (type == "收納" && !bag.checked) {
 						continue;
 					}
 					if (type == "食物" && !fod.checked) {
@@ -804,7 +804,7 @@
 					if (type == "魔具" && !dep.checked) {
 						continue;
 					}
-					if (type == "その他" && !oth.checked) {
+					if (type == "其它" && !oth.checked) {
 						continue;
 					}
 				}
